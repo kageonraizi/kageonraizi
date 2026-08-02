@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>影音雷時 | Official Site</title>
+<meta name="description" content="影音雷時 オフィシャルサイト">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:        #0a0908;
+    --bg-panel:  #131019;
+    --bg-panel2: #17131d;
+    --ink:       #e9e2d2;
+    --ink-dim:   #9c9184;
+    --ink-faint: #5f584e;
+    --red:       #7c2020;
+    --red-bright:#a83232;
+    --gold:      #b8934f;
+    --gold-bright:#dbb877;
+    --line:      rgba(184,147,79,0.22);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    font-weight:300;
+    line-height:1.9;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124,32,32,0.18), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 30%, rgba(184,147,79,0.06), transparent 60%);
+  }
+
+  ::selection{ background:var(--red); color:var(--ink); }
+
+  a{ color:inherit; text-decoration:none; }
+
+  img{ max-width:100%; display:block; }
+
+  .font-mincho{ font-family:"Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif; }
+
+  /* ---------- utility: section wrapper ---------- */
+  section{
+    position:relative;
+    padding: clamp(64px, 12vw, 140px) 24px;
+    max-width:1080px;
+    margin:0 auto;
+  }
+
+  .eyebrow{
+    font-family:"Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.42em;
+    color:var(--gold);
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:28px;
+  }
+  .eyebrow::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, var(--line), transparent);
+  }
+
+  /* ---------- signature: 雷 crack divider ---------- */
+  .crack-divider{
+    width:100%;
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  .crack-divider svg{ width:100%; height:auto; display:block; }
+  .crack-path{
+    stroke:var(--gold);
+    stroke-width:1.4;
+    fill:none;
+    stroke-dasharray:600;
+    stroke-dashoffset:600;
+    animation:draw 2.6s ease forwards;
+    animation-play-state:paused;
+    opacity:0.75;
+  }
+  .crack-divider.in-view .crack-path{ animation-play-state:running; }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  @media (prefers-reduced-motion: reduce){
+    .crack-path{ animation:none; stroke-dashoffset:0; }
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+
+  /* ================= HERO ================= */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:100px 0 80px;
+    max-width:none;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, transparent 0%, var(--bg) 96%),
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+  }
+  /* 墨の飛沫 */
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    pointer-events:none;
+    background-image:
+      radial-gradient(circle at 6% 22%,  rgba(233,226,210,0.55) 0 3px, transparent 4px),
+      radial-gradient(circle at 4% 34%,  rgba(233,226,210,0.30) 0 1.5px, transparent 3px),
+      radial-gradient(circle at 11% 40%, rgba(184,147,79,0.55) 0 2px, transparent 3px),
+      radial-gradient(circle at 3% 58%,  rgba(233,226,210,0.4) 0 4px, transparent 5px),
+      radial-gradient(circle at 9% 70%,  rgba(124,32,32,0.55) 0 2px, transparent 3px),
+      radial-gradient(circle at 16% 78%, rgba(233,226,210,0.3) 0 1.5px, transparent 3px),
+      radial-gradient(circle at 93% 20%, rgba(233,226,210,0.5) 0 3px, transparent 4px),
+      radial-gradient(circle at 96% 33%, rgba(124,32,32,0.5) 0 2px, transparent 3px),
+      radial-gradient(circle at 89% 46%, rgba(233,226,210,0.3) 0 1.5px, transparent 3px),
+      radial-gradient(circle at 95% 62%, rgba(184,147,79,0.5) 0 3px, transparent 4px),
+      radial-gradient(circle at 91% 74%, rgba(233,226,210,0.35) 0 2px, transparent 3px),
+      radial-gradient(circle at 85% 84%, rgba(233,226,210,0.25) 0 1.5px, transparent 3px);
+  }
+  .hero-inner{ position:relative; z-index:1; width:100%; opacity:0; animation:rise 1.4s 0.2s ease forwards; }
+  @keyframes rise{ from{ opacity:0; transform:translateY(18px);} to{ opacity:1; transform:translateY(0);} }
+
+  .ink-blot{
+    position:absolute;
+    background:var(--ink);
+    opacity:0.85;
+    pointer-events:none;
+    filter:url(#ink-rough);
+    z-index:0;
+  }
+  .ink-blot--a{
+    width:100px; height:78px;
+    left:3%; bottom:10%;
+    clip-path:polygon(20% 0%, 55% 8%, 82% 0%, 100% 28%, 90% 52%, 100% 78%, 68% 100%, 38% 88%, 14% 100%, 0% 66%, 10% 38%);
+    transform:rotate(-14deg);
+  }
+  .ink-blot--a::after{
+    content:"";
+    position:absolute;
+    width:5px; height:52px;
+    background:var(--ink);
+    bottom:-44px; left:34%;
+    border-radius:0 0 50% 50%;
+    transform:rotate(18deg);
+    opacity:0.65;
+  }
+  .ink-blot--b{
+    width:74px; height:58px;
+    right:5%; top:8%;
+    clip-path:polygon(30% 0%, 62% 4%, 92% 20%, 100% 48%, 84% 74%, 58% 100%, 28% 90%, 4% 58%, 0% 28%);
+    transform:rotate(12deg);
+    opacity:0.7;
+  }
+  @media(max-width:640px){
+    .ink-blot--a{ width:64px; height:50px; }
+    .ink-blot--b{ width:48px; height:38px; }
+  }
+
+  .hero-eyebrow{
+    font-size:0.72rem;
+    letter-spacing:0.5em;
+    color:var(--ink-dim);
+    text-transform:uppercase;
+    margin-bottom:36px;
+  }
+
+  .hero-title{
+    font-family:"Yuji Syuku", "Noto Sans JP", serif;
+    font-weight:400;
+    font-size:clamp(3.4rem, 21vw, 12rem);
+    line-height:1.2;
+    color:var(--ink);
+    text-shadow:0 0 70px rgba(124,32,32,0.55), 0 0 140px rgba(184,147,79,0.15);
+    margin-bottom:32px;
+    display:flex;
+    width:100%;
+    padding:0.25em 5vw;
+    justify-content:space-between;
+    align-items:baseline;
+  }
+  .hero-title .char{ display:inline-block; position:relative; }
+  .hero-title .char:nth-child(1){ transform:translateY(-0.05em) rotate(-3deg); }
+  .hero-title .char:nth-child(2){ transform:translateY(0.11em) rotate(2deg); }
+  .hero-title .char:nth-child(3){ transform:translateY(-0.15em) rotate(-3.5deg); }
+  .hero-title .char:nth-child(4){ transform:translateY(0.08em) rotate(2.5deg); }
+  .hero-title .accent{ color:var(--red-bright); }
+
+  /* 文字まわりの小さな飛沫(各字の近くに散らす) */
+  .hero-title .char::before,
+  .hero-title .char::after{
+    content:"";
+    position:absolute;
+    width:0.05em; height:0.05em;
+    border-radius:50%;
+    background:currentColor;
+    opacity:0.6;
+  }
+  .hero-title .char:nth-child(1)::before{ top:-0.06em; right:-0.08em; width:0.035em; height:0.035em; }
+  .hero-title .char:nth-child(1)::after{ bottom:0.05em; right:-0.14em; width:0.02em; height:0.02em; opacity:0.4; }
+  .hero-title .char:nth-child(2)::before{ top:0.9em; left:-0.1em; width:0.04em; height:0.04em; }
+  .hero-title .char:nth-child(2)::after{ top:-0.08em; left:0.3em; width:0.02em; height:0.02em; opacity:0.4; }
+  .hero-title .char:nth-child(3)::before{ bottom:-0.1em; left:-0.1em; width:0.045em; height:0.045em; }
+  .hero-title .char:nth-child(3)::after{ top:0.05em; right:-0.16em; width:0.025em; height:0.025em; opacity:0.5; }
+  .hero-title .char:nth-child(4)::before{ top:-0.05em; left:-0.1em; width:0.035em; height:0.035em; }
+  .hero-title .char:nth-child(4)::after{ bottom:0.1em; left:0.35em; width:0.02em; height:0.02em; opacity:0.4; }
+
+  .hero-reading{
+    font-size:0.85rem;
+    letter-spacing:0.5em;
+    color:var(--gold);
+    margin-bottom:44px;
+  }
+
+
+  .hero-tagline{
+    font-family:"Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    font-size:clamp(0.85rem, 2vw, 1.05rem);
+    color:var(--ink-dim);
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:36px; left:50%; transform:translateX(-50%);
+    width:1px; height:64px;
+    background:linear-gradient(180deg, transparent, var(--gold) 60%, transparent);
+  }
+  .scroll-cue::after{
+    content:"";
+    position:absolute; top:0; left:-2px;
+    width:5px; height:5px; border-radius:50%;
+    background:var(--gold-bright);
+    animation:drip 2.2s ease-in-out infinite;
+  }
+  @keyframes drip{ 0%{ top:0; opacity:1;} 90%{ opacity:0.4;} 100%{ top:60px; opacity:0;} }
+
+  /* ================= MEMBERS ================= */
+  .members-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media(min-width:640px){ .members-grid{ grid-template-columns:1fr 1fr; } }
+
+  .member-card{
+    background:var(--bg-panel);
+    padding:36px 30px;
+    display:flex;
+    gap:24px;
+    align-items:flex-start;
+    transition:background 0.4s ease;
+  }
+  .member-card:hover{ background:var(--bg-panel2); }
+
+  .member-photo{
+    flex:none;
+    width:110px;
+    aspect-ratio:4/5;
+    border:1px dashed var(--line);
+    background:
+      linear-gradient(135deg, rgba(184,147,79,0.05), rgba(124,32,32,0.05));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-size:0.62rem;
+    color:var(--ink-faint);
+    letter-spacing:0.05em;
+    line-height:1.5;
+    padding:6px;
+  }
+  /* 画像を入れる場合: 上のdiv.member-photoの中身を
+     <img src="images/member1.jpg" alt="タカハシヒロト"> に置き換えてください */
+
+  .member-info{ padding-top:4px; }
+
+  .member-part{
+    font-size:0.7rem;
+    letter-spacing:0.25em;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+
+  .member-name{
+    font-family:"Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    font-size:1.5rem;
+    font-weight:600;
+    letter-spacing:0.05em;
+    color:var(--ink);
+    writing-mode:horizontal-tb;
+  }
+
+  /* ================= DISCOGRAPHY ================= */
+  .disco-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:20px;
+  }
+  @media(min-width:640px){ .disco-grid{ grid-template-columns:repeat(3, 1fr); } }
+
+  .disco-item{ display:flex; flex-direction:column; gap:12px; }
+
+  .disco-jacket{
+    aspect-ratio:1/1;
+    border:1px dashed var(--line);
+    background:
+      linear-gradient(160deg, rgba(184,147,79,0.06), transparent 60%),
+      var(--bg-panel);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .disco-jacket::before{
+    content:"";
+    position:absolute; inset:0;
+    background:repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(184,147,79,0.03) 8px, rgba(184,147,79,0.03) 9px);
+  }
+  .disco-jacket span{
+    position:relative;
+    font-size:0.65rem;
+    color:var(--ink-faint);
+    letter-spacing:0.08em;
+    text-align:center;
+    padding:8px;
+  }
+  /* 画像を入れる場合: div.disco-jacketの中身を
+     <img src="images/cd01.jpg" alt="アルバムタイトル"> に置き換えてください */
+
+  .disco-label{ text-align:center; }
+  .disco-no{ font-size:0.65rem; color:var(--gold); letter-spacing:0.2em; }
+  .disco-title{ font-family:"Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif; font-size:0.9rem; color:var(--ink-dim); margin-top:2px; }
+
+  /* ================= LIVE ================= */
+  .live-card{
+    border:1px solid var(--line);
+    background:linear-gradient(135deg, var(--bg-panel), var(--bg-panel2));
+    padding:clamp(28px, 5vw, 56px);
+    display:flex;
+    flex-wrap:wrap;
+    gap:32px;
+    justify-content:space-between;
+    align-items:center;
+    position:relative;
+  }
+  .live-date{
+    font-family:"Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    font-size:clamp(2.2rem, 6vw, 3.2rem);
+    font-weight:700;
+    color:var(--ink);
+    line-height:1;
+  }
+  .live-date .year{ font-size:0.5em; color:var(--ink-dim); display:block; margin-bottom:8px; letter-spacing:0.1em; }
+
+  .live-details{ flex:1; min-width:220px; }
+  .live-venue{
+    font-family:"Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    font-size:1.4rem;
+    color:var(--gold-bright);
+    margin-bottom:6px;
+  }
+  .live-note{ font-size:0.85rem; color:var(--ink-dim); }
+
+  /* ================= FOOTER / SNS ================= */
+  footer{
+    padding:clamp(56px, 10vw, 100px) 24px 48px;
+    text-align:center;
+    border-top:1px solid var(--line);
+    margin-top:40px;
+  }
+  .sns-title{
+    font-family:"Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    font-size:0.85rem;
+    letter-spacing:0.4em;
+    color:var(--ink-dim);
+    text-transform:uppercase;
+    margin-bottom:36px;
+  }
+  .sns-row{
+    display:flex;
+    justify-content:center;
+    gap:22px;
+    flex-wrap:wrap;
+    margin-bottom:56px;
+  }
+  .sns-link{
+    width:52px; height:52px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-dim);
+    transition:color 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+  }
+  @media (hover:hover) and (pointer:fine){
+    .sns-link:hover{
+      color:var(--gold-bright);
+      border-color:var(--gold);
+      box-shadow:0 0 24px rgba(184,147,79,0.25);
+      transform:translateY(-3px);
+    }
+  }
+  .sns-link:active{
+    color:var(--gold-bright);
+    border-color:var(--gold);
+    transform:scale(0.94);
+  }
+  .sns-link svg{ width:20px; height:20px; fill:currentColor; }
+
+  .band-mark{
+    font-family:"Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    font-size:1.1rem;
+    letter-spacing:0.3em;
+    color:var(--ink-faint);
+    margin-bottom:10px;
+  }
+  .copyright{ font-size:0.72rem; color:var(--ink-faint); letter-spacing:0.05em; }
+
+  /* fade-in on scroll */
+  .fade-up{ opacity:0; transform:translateY(24px); transition:opacity 0.9s ease, transform 0.9s ease; }
+  .fade-up.in-view{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="ink-rough" x="-30%" y="-30%" width="160%" height="160%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02 0.12" numOctaves="4" seed="11" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="11" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="ink-blot ink-blot--a" aria-hidden="true"></div>
+  <div class="ink-blot ink-blot--b" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Official Site</p>
+    <h1 class="hero-title">
+      <span class="char">影</span><span class="char">音</span><span class="char accent">雷</span><span class="char">時</span>
+    </h1>
+    <p class="hero-reading">kageonraizi</p>
+    <p class="hero-tagline font-mincho">Alternative Guitar Rock Band</p>
+  </div>
+  <div class="scroll-cue"></div>
+</header>
+
+<div class="crack-divider" aria-hidden="true">
+  <svg viewBox="0 0 1080 60" preserveAspectRatio="none">
+    <path class="crack-path" d="M0,30 L120,28 L150,10 L180,42 L230,32 L260,55 L310,25 L360,30 L420,15 L460,38 L520,30 L580,20 L640,40 L700,28 L760,32 L820,12 L870,38 L930,30 L1000,26 L1080,30" />
+  </svg>
+</div>
+
+<!-- ========== MEMBERS ========== -->
+<section id="members">
+  <p class="eyebrow fade-up">Members</p>
+
+  <div class="members-grid fade-up">
+    <div class="member-card">
+      <div class="member-photo">写真<br>(推奨 800×1000px)</div>
+      <div class="member-info">
+        <p class="member-part">Gt / Vo</p>
+        <p class="member-name">ヒロト</p>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-photo">写真<br>(推奨 800×1000px)</div>
+      <div class="member-info">
+        <p class="member-part">Gt / Chorus</p>
+        <p class="member-name">JAM</p>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-photo">写真<br>(推奨 800×1000px)</div>
+      <div class="member-info">
+        <p class="member-part">Ba / Chorus</p>
+        <p class="member-name">you</p>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-photo">写真<br>(推奨 800×1000px)</div>
+      <div class="member-info">
+        <p class="member-part">Dr / Chorus</p>
+        <p class="member-name">卍</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="crack-divider" aria-hidden="true">
+  <svg viewBox="0 0 1080 60" preserveAspectRatio="none">
+    <path class="crack-path" d="M1080,30 L960,32 L930,12 L900,45 L850,28 L820,52 L770,22 L710,30 L660,14 L620,40 L560,30 L500,18 L440,42 L380,26 L320,32 L260,10 L210,38 L150,30 L80,26 L0,30" />
+  </svg>
+</div>
+
+<!-- ========== DISCOGRAPHY ========== -->
+<section id="discography">
+  <p class="eyebrow fade-up">Discography</p>
+
+  <div class="disco-grid fade-up">
+    <div class="disco-item">
+      <div class="disco-jacket"><span>ジャケット画像<br>(1000×1000px推奨)</span></div>
+      <div class="disco-label"><p class="disco-no">1st Single</p><p class="disco-title">霧の音</p></div>
+    </div>
+    <div class="disco-item">
+      <div class="disco-jacket"><span>ジャケット画像<br>(1000×1000px推奨)</span></div>
+      <div class="disco-label"><p class="disco-no">2nd Single</p><p class="disco-title">雷雲</p></div>
+    </div>
+    <div class="disco-item">
+      <div class="disco-jacket"><span>ジャケット画像<br>(1000×1000px推奨)</span></div>
+      <div class="disco-label"><p class="disco-no">3rd Mini Album</p><p class="disco-title">途中の景色</p></div>
+    </div>
+    <div class="disco-item">
+      <div class="disco-jacket"><span>ジャケット画像<br>(1000×1000px推奨)</span></div>
+      <div class="disco-label"><p class="disco-no">4th Single</p><p class="disco-title">手紙</p></div>
+    </div>
+    <div class="disco-item">
+      <div class="disco-jacket"><span>ジャケット画像<br>(1000×1000px推奨)</span></div>
+      <div class="disco-label"><p class="disco-no">5th Single</p><p class="disco-title">メロス</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="crack-divider" aria-hidden="true">
+  <svg viewBox="0 0 1080 60" preserveAspectRatio="none">
+    <path class="crack-path" d="M0,30 L120,28 L150,10 L180,42 L230,32 L260,55 L310,25 L360,30 L420,15 L460,38 L520,30 L580,20 L640,40 L700,28 L760,32 L820,12 L870,38 L930,30 L1000,26 L1080,30" />
+  </svg>
+</div>
+
+<!-- ========== LIVE ========== -->
+<section id="live">
+  <p class="eyebrow fade-up">Live</p>
+
+  <div class="live-card fade-up">
+    <div class="live-date">
+      <span class="year">2026</span>
+      10.03
+    </div>
+    <div class="live-details">
+      <p class="live-venue">石巻 Blue resistance</p>
+      <p class="live-note">詳細は追ってお知らせします。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER / SNS ========== -->
+<footer>
+  <p class="sns-title">Follow</p>
+  <div class="sns-row">
+    <!-- 各リンクの href="#" を実際のURLに差し替えてください -->
+    <a class="sns-link" href="https://x.com/kageonraizi?s=11" target="_blank" rel="noopener" aria-label="Twitter / X">
+      <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7.2l-5.6-6.9L4 22H1l8.1-9.3L0.9 2h7.4l5.1 6.3L18.9 2zm-1.3 18h2L7.5 4H5.4l12.2 16z"/></svg>
+    </a>
+    <a class="sns-link" href="https://www.instagram.com/kageonraizi?igsh=dWE0NTZiaHJwZGI1&amp;utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2.6.35 3.5 1.3.96.94 1.25 2.3 1.3 3.5.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.35 2.6-1.3 3.5-.94.96-2.3 1.25-3.5 1.3-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-2.6-.35-3.5-1.3-.96-.94-1.25-2.3-1.3-3.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.35-2.6 1.3-3.5.94-.96 2.3-1.25 3.5-1.3C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.14 0-3.5 0-4.76.07-1 .05-1.9.25-2.6.94-.7.7-.9 1.6-.94 2.6C3.6 8.5 3.6 8.86 3.6 12s0 3.5.07 4.76c.05 1 .25 1.9.94 2.6.7.7 1.6.9 2.6.94 1.26.06 1.62.07 4.76.07s3.5 0 4.76-.07c1-.05 1.9-.25 2.6-.94.7-.7.9-1.6.94-2.6.06-1.26.07-1.62.07-4.76s0-3.5-.07-4.76c-.05-1-.25-1.9-.94-2.6-.7-.7-1.6-.9-2.6-.94C15.5 4 15.14 4 12 4zm0 3.4a4.6 4.6 0 110 9.2 4.6 4.6 0 010-9.2zm0 1.8a2.8 2.8 0 100 5.6 2.8 2.8 0 000-5.6zm4.8-2.3a1.08 1.08 0 110 2.16 1.08 1.08 0 010-2.16z"/></svg>
+    </a>
+    <a class="sns-link" href="https://lin.ee/Z7R0NsH" target="_blank" rel="noopener" aria-label="LINE公式アカウント">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.7 2 10.24c0 4.08 3.58 7.5 8.4 8.14.33.07.78.22.9.5.1.26.06.66.03.92l-.14 1.03c-.04.3-.24 1.18 1.03.65 1.28-.55 6.9-4.06 9.42-6.95C22.9 12.9 22 11.68 22 10.24 22 5.7 17.52 2 12 2zM8.8 12.9H6.3a.35.35 0 01-.35-.35V8.5c0-.2.16-.35.35-.35s.35.16.35.35v3.7h2.15c.2 0 .35.16.35.35s-.16.35-.35.35zm1.9 0a.35.35 0 01-.35-.35V8.5c0-.2.16-.35.35-.35s.35.16.35.35v4.05a.35.35 0 01-.35.35zm4.9 0a.35.35 0 01-.28-.14l-2.15-2.94v2.73a.35.35 0 01-.7 0V8.5c0-.16.1-.3.25-.34a.34.34 0 01.38.13l2.15 2.93V8.5c0-.2.16-.35.35-.35s.35.16.35.35v4.05a.35.35 0 01-.35.35zm3.85-3.35h-1.6v.98h1.6c.2 0 .35.16.35.35s-.16.35-.35.35h-1.6v.98h1.6c.2 0 .35.16.35.35s-.16.35-.35.35h-1.95a.35.35 0 01-.35-.35V8.5c0-.2.16-.35.35-.35h1.95c.2 0 .35.16.35.35s-.16.35-.35.35z"/></svg>
+    </a>
+    <a class="sns-link" href="https://youtube.com/playlist?list=PL2D82C756BF2E9A5E&amp;si=BcutKjsb21ehmIIH" target="_blank" rel="noopener" aria-label="YouTube">
+      <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.5V8.5L15.8 12l-6.2 3.5z"/></svg>
+    </a>
+  </div>
+
+  <p class="band-mark">影音雷時</p>
+  <p class="copyright">© 2026 Kageonraizi. All rights reserved.</p>
+</footer>
+
+<script>
+  // scroll-triggered fade-ins & crack draw
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.fade-up, .crack-divider').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
