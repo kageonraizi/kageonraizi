@@ -329,7 +329,7 @@
 
   .disco-jacket{
     aspect-ratio:1/1;
-    border:1px dashed var(--line);
+    border:1px solid var(--line);
     background:
       linear-gradient(160deg, rgba(184,147,79,0.06), transparent 60%),
       var(--bg-panel);
@@ -339,10 +339,22 @@
     position:relative;
     overflow:hidden;
   }
+  .disco-jacket img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    filter:saturate(0.9) contrast(1.05);
+    transition:transform 0.6s ease, filter 0.6s ease;
+  }
+  .disco-item:hover .disco-jacket img{
+    transform:scale(1.05);
+    filter:saturate(1) contrast(1.1);
+  }
   .disco-jacket::before{
     content:"";
     position:absolute; inset:0;
     background:repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(184,147,79,0.03) 8px, rgba(184,147,79,0.03) 9px);
+    pointer-events:none;
   }
   .disco-jacket span{
     position:relative;
@@ -352,9 +364,6 @@
     text-align:center;
     padding:8px;
   }
-  /* 画像を入れる場合: div.disco-jacketの中身を
-     <img src="images/cd01.jpg" alt="アルバムタイトル"> に置き換えてください */
-
   .disco-label{ text-align:center; }
   .disco-no{ font-size:0.65rem; color:var(--gold); letter-spacing:0.2em; }
   .disco-title{ font-family:"Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif; font-size:0.9rem; color:var(--ink-dim); margin-top:2px; }
@@ -531,24 +540,28 @@
 
   <div class="disco-grid fade-up">
     <div class="disco-item">
-      <div class="disco-jacket"><span>ジャケット画像<br>(1000×1000px推奨)</span></div>
+      <div class="disco-jacket"><img src="images/cd01_kirinooto.gif" alt="霧の音 ジャケット"></div>
       <div class="disco-label"><p class="disco-no">1st Single</p><p class="disco-title">霧の音</p></div>
     </div>
     <div class="disco-item">
-      <div class="disco-jacket"><span>ジャケット画像<br>(1000×1000px推奨)</span></div>
+      <div class="disco-jacket"><img src="images/cd02_raiun.gif" alt="雷雲 ジャケット"></div>
       <div class="disco-label"><p class="disco-no">2nd Single</p><p class="disco-title">雷雲</p></div>
     </div>
     <div class="disco-item">
-      <div class="disco-jacket"><span>ジャケット画像<br>(1000×1000px推奨)</span></div>
+      <div class="disco-jacket"><img src="images/cd03_tochunokeshiki.gif" alt="途中の景色 ジャケット"></div>
       <div class="disco-label"><p class="disco-no">3rd Mini Album</p><p class="disco-title">途中の景色</p></div>
     </div>
     <div class="disco-item">
-      <div class="disco-jacket"><span>ジャケット画像<br>(1000×1000px推奨)</span></div>
+      <div class="disco-jacket"><img src="images/cd04_tegami.gif" alt="手紙 ジャケット"></div>
       <div class="disco-label"><p class="disco-no">4th Single</p><p class="disco-title">手紙</p></div>
     </div>
     <div class="disco-item">
-      <div class="disco-jacket"><span>ジャケット画像<br>(1000×1000px推奨)</span></div>
+      <div class="disco-jacket"><img src="images/cd05_melos.jpeg" alt="メロス ジャケット"></div>
       <div class="disco-label"><p class="disco-no">5th Single</p><p class="disco-title">メロス</p></div>
+    </div>
+    <div class="disco-item">
+      <div class="disco-jacket"><img src="images/cd06_buzzerbeater.jpeg" alt="BUZZER BEATER ジャケット"></div>
+      <div class="disco-label"><p class="disco-no">6th Single</p><p class="disco-title">BUZZER BEATER</p></div>
     </div>
   </div>
 </section>
