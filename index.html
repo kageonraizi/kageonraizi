@@ -483,6 +483,38 @@
     border:1px solid var(--line);
     background:var(--bg);
   }
+/* MAPリンク・アクセスのスタイリング */
+  .live-access {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+    margin-bottom: 12px;
+  }
+
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--gold-bright);
+    border: 1px solid var(--line);
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: rgba(184, 147, 79, 0.08);
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .map-link:hover {
+    background: rgba(184, 147, 79, 0.2);
+    border-color: var(--gold);
+  }
+
+  .access-note {
+    font-size: 0.8rem;
+    color: var(--ink-dim);
+  }
 
   /* ================= FOOTER / SNS ================= */
   footer{
@@ -664,6 +696,14 @@
     </div>
     <div class="live-details">
       <p class="live-venue">石巻 Blue resistance</p>
+<!-- MAPリンク・アクセス情報 -->
+  <div class="live-access">
+    <a href="https://maps.google.com/?q=石巻Blue+resistance" target="_blank" rel="noopener" class="map-link">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      Google MAPで見る
+    </a>
+    <span class="access-note">JR石巻駅から徒歩約10分 / 仙石線</span>
+  </div>
       <p class="live-note">詳細は追ってお知らせします。</p>
 
       <div class="live-info-row">
