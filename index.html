@@ -187,45 +187,18 @@
     margin-bottom:36px;
   }
 
-  .hero-title{
-    font-family:"Yuji Syuku", "Noto Sans JP", serif;
-    font-weight:400;
-    font-size:clamp(3.4rem, 21vw, 12rem);
-    line-height:1.2;
-    color:var(--ink);
-    text-shadow:0 0 70px rgba(124,32,32,0.55), 0 0 140px rgba(184,147,79,0.15);
-    margin-bottom:32px;
-    display:flex;
+  .hero-logo{
     width:100%;
-    padding:0.25em 5vw;
-    justify-content:space-between;
-    align-items:baseline;
+    padding:0 4vw;
+    margin-bottom:32px;
+    filter:drop-shadow(0 0 60px rgba(124,32,32,0.45)) drop-shadow(0 0 110px rgba(184,147,79,0.12));
   }
-  .hero-title .char{ display:inline-block; position:relative; }
-  .hero-title .char:nth-child(1){ transform:translateY(-0.05em) rotate(-3deg); }
-  .hero-title .char:nth-child(2){ transform:translateY(0.11em) rotate(2deg); }
-  .hero-title .char:nth-child(3){ transform:translateY(-0.15em) rotate(-3.5deg); }
-  .hero-title .char:nth-child(4){ transform:translateY(0.08em) rotate(2.5deg); }
-  .hero-title .accent{ color:var(--red-bright); }
-
-  /* 文字まわりの小さな飛沫(各字の近くに散らす) */
-  .hero-title .char::before,
-  .hero-title .char::after{
-    content:"";
-    position:absolute;
-    width:0.05em; height:0.05em;
-    border-radius:50%;
-    background:currentColor;
-    opacity:0.6;
+  .hero-logo img{
+    width:100%;
+    height:auto;
+    display:block;
+    mix-blend-mode:screen;
   }
-  .hero-title .char:nth-child(1)::before{ top:-0.06em; right:-0.08em; width:0.035em; height:0.035em; }
-  .hero-title .char:nth-child(1)::after{ bottom:0.05em; right:-0.14em; width:0.02em; height:0.02em; opacity:0.4; }
-  .hero-title .char:nth-child(2)::before{ top:0.9em; left:-0.1em; width:0.04em; height:0.04em; }
-  .hero-title .char:nth-child(2)::after{ top:-0.08em; left:0.3em; width:0.02em; height:0.02em; opacity:0.4; }
-  .hero-title .char:nth-child(3)::before{ bottom:-0.1em; left:-0.1em; width:0.045em; height:0.045em; }
-  .hero-title .char:nth-child(3)::after{ top:0.05em; right:-0.16em; width:0.025em; height:0.025em; opacity:0.5; }
-  .hero-title .char:nth-child(4)::before{ top:-0.05em; left:-0.1em; width:0.035em; height:0.035em; }
-  .hero-title .char:nth-child(4)::after{ bottom:0.1em; left:0.35em; width:0.02em; height:0.02em; opacity:0.4; }
 
   .hero-reading{
     font-size:0.85rem;
@@ -531,8 +504,8 @@
   <div class="ink-blot ink-blot--b" aria-hidden="true"></div>
   <div class="hero-inner">
     <p class="hero-eyebrow">Official Site</p>
-    <h1 class="hero-title">
-      <span class="char">影</span><span class="char">音</span><span class="char accent">雷</span><span class="char">時</span>
+    <h1 class="hero-logo">
+      <img src="logo_ink.png" alt="影音雷時">
     </h1>
     <p class="hero-reading">kageonraizi</p>
     <p class="hero-tagline font-mincho">Alternative Guitar Rock Band</p>
