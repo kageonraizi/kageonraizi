@@ -783,9 +783,152 @@
   border-color: var(--gold);
   color: var(--gold-bright, #b4934f);
 }
+/* ================= FIXED HEADER NAV ================= */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  height: 60px;
+  background: rgba(10, 9, 8, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 999;
+}
+
+.site-logo-mini {
+  font-family: "Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: var(--ink);
+}
+
+/* PC用メニュー */
+.nav-menu {
+  display: none;
+  list-style: none;
+  gap: 24px;
+}
+
+.nav-menu a {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--ink-dim);
+  transition: color 0.2s;
+}
+
+.nav-menu a:hover {
+  color: var(--gold-bright);
+}
+
+@media(min-width: 900px) {
+  .nav-menu { display: flex; }
+  .menu-toggle { display: none; }
+}
+
+/* スマホ用ハンバーガーボタン */
+.menu-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* スマホ用ドロワーメニュー */
+.nav-drawer {
+  position: fixed;
+  top: 60px; left: 0; width: 100%;
+  height: calc(100svh - 60px);
+  background: rgba(10, 9, 8, 0.98);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 998;
+}
+
+.nav-drawer.active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav-drawer a {
+  font-size: 1rem;
+  letter-spacing: 0.25em;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+
+.nav-drawer a:hover {
+  color: var(--gold-bright);
+}
+
+/* ハンバーガー変形アニメーション用 */
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 </style>
 </head>
 <body>
+<!-- ========== HEADER NAV ========== -->
+<header class="site-header">
+  <a href="#" class="site-logo-mini"></a>
+
+  <!-- PC用ナビゲーション -->
+  <ul class="nav-menu">
+    <li><a href="#information">INFORMATION</a></li>
+    <li><a href="#about">PROFILE</a></li>
+    <li><a href="#live">LIVE</a></li>
+    <li><a href="#members">MEMBERS</a></li>
+    <li><a href="#discography">DISCOGRAPHY</a></li>
+    <li><a href="#gallery">GALLERY</a></li>
+    <li><a href="#follow">FOLLOW</a></li>
+  </ul>
+
+  <!-- スマホ用ハンバーガーボタン -->
+  <button class="menu-toggle" onclick="toggleNav()" aria-label="メニューを開閉">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- スマホ用プルダウンメニュー -->
+<nav class="nav-drawer" id="navDrawer">
+  <a href="#information" onclick="toggleNav()">INFORMATION</a>
+  <a href="#about" onclick="toggleNav()">PROFILE</a>
+  <a href="#live" onclick="toggleNav()">LIVE</a>
+  <a href="#members" onclick="toggleNav()">MEMBERS</a>
+  <a href="#discography" onclick="toggleNav()">DISCOGRAPHY</a>
+  <a href="#gallery" onclick="toggleNav()">GALLERY</a>
+  <a href="#follow" onclick="toggleNav()">FOLLOW</a>
+</nav>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="ink-rough" x="-30%" y="-30%" width="160%" height="160%">
@@ -1157,6 +1300,22 @@ function toggleInfo() {
       closeGalleryList(true);
     }
   });
+/* スマホ用メニューの開閉制御 */
+function toggleNav() {
+  const drawer = document.getElementById('navDrawer');
+  const toggleBtn = document.querySelector('.menu-toggle');
+  
+  drawer.classList.toggle('active');
+  toggleBtn.classList.toggle('active');
+  
+  // メニューが開いているときは背景のスクロールを固定
+  if (drawer.classList.contains('active')) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+}
+
 </script>
 
 </body>
