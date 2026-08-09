@@ -764,6 +764,25 @@
   /* fade-in on scroll */
   .fade-up{ opacity:0; transform:translateY(24px); transition:opacity 0.9s ease, transform 0.9s ease; }
   .fade-up.in-view{ opacity:1; transform:translateY(0); }
+/* もっと見るボタンのスタイル */
+.more-btn {
+  display: block;
+  margin: 24px auto 0;
+  padding: 10px 28px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-dim, #666);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.more-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold-bright, #b4934f);
+}
 </style>
 </head>
 <body>
@@ -800,6 +819,7 @@
 <section id="information">
   <p class="eyebrow fade-up">Information</p>
   <div class="info-list fade-up">
+    <!-- 【常に表示する最新の3件】 -->
     <dl class="info-item">
       <dt class="info-date">2026.08.09</dt>
       <dd class="info-text">informationを公開しました。</dd>
@@ -812,15 +832,22 @@
       <dt class="info-date">2026.08.08</dt>
       <dd class="info-text">プロフィール画面を更新しました。</dd>
     </dl>
-    <dl class="info-item">
-      <dt class="info-date">2026.08.01</dt>
-      <dd class="info-text">2026.10.03 石巻Blue resistanceでのライブ情報を公開しました。詳細は各種SNSにて。</dd>
-    </dl>
-    <dl class="info-item">
-      <dt class="info-date">2026.08.01</dt>
-      <dd class="info-text">影音雷時 オフィシャルサイトをオープンしました。</dd>
-    </dl>
+
+    <!-- 【「もっと見る」で展開される過去のお知らせ】 -->
+    <div id="more-info" style="display: none;">
+      <dl class="info-item">
+        <dt class="info-date">2026.08.01</dt>
+        <dd class="info-text">2026.10.03 石巻Blue resistanceでのライブ情報を公開しました。詳細は各種SNSにて。</dd>
+      </dl>
+      <dl class="info-item">
+        <dt class="info-date">2026.08.01</dt>
+        <dd class="info-text">影音雷時 オフィシャルサイトをオープンしました。</dd>
+      </dl>
+    </div>
   </div>
+
+  <!-- もっと見るボタン -->
+  <button id="toggle-btn" class="more-btn" onclick="toggleInfo()">もっと見る ＋</button>
 </section>
 
 <div class="crack-divider" aria-hidden="true">
@@ -829,6 +856,22 @@
   </svg>
 </div>
 
+<script>
+/* もっと見る・閉じるの開閉スクリプト */
+function toggleInfo() {
+  const moreContent = document.getElementById('more-info');
+  const btn = document.getElementById('toggle-btn');
+  
+  if (moreContent.style.display === 'none' || moreContent.style.display === '') {
+    moreContent.style.display = 'block';
+    btn.textContent = '閉じる －';
+  } else {
+    moreContent.style.display = 'none';
+    btn.textContent = 'もっと見る ＋';
+  }
+}
+</script>
+  
 <!-- ========== 2. PROFILE ========== -->
 <section id="about">
   <p class="eyebrow fade-up">Profile</p>
