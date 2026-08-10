@@ -893,6 +893,54 @@
 .menu-toggle.active span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
+
+.jacket-player-container {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.jacket-player-container img {
+  width: 100%;
+  display: block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.jacket-player-container:hover img {
+  transform: scale(1.03);
+  filter: brightness(0.8);
+}
+.play-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.jacket-player-container:hover .play-overlay,
+.jacket-player-container.playing .play-overlay {
+  opacity: 1;
+}
+.play-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--gold-bright, #d4af37);
+  color: #0a0908;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: transform 0.2s;
+}
+.jacket-player-container:hover .play-icon {
+  transform: scale(1.1);
+}
+
 </style>
 </head>
 <body>
@@ -965,19 +1013,23 @@
     <!-- 【常に表示する最新の3件】 -->
     <dl class="info-item">
       <dt class="info-date">2026.08.10</dt>
+      <dd class="info-text">DISCOGRAPHYにて楽曲視聴機能を追加しました。</dd>
+    </dl>
+    <dl class="info-item">
+      <dt class="info-date">2026.08.10</dt>
       <dd class="info-text">サイトマップ機能を追加しました。</dd>
     </dl>
     <dl class="info-item">
       <dt class="info-date">2026.08.09</dt>
       <dd class="info-text">informationを公開しました。</dd>
     </dl>
-    <dl class="info-item">
-      <dt class="info-date">2026.08.09</dt>
-      <dd class="info-text">GALLERYを公開しました。</dd>
-    </dl>
     <!-- 【「もっと見る」で展開される過去のお知らせ】 -->
     <div id="more-info" style="display: none;">
-<dl class="info-item">
+      <dl class="info-item">
+        <dt class="info-date">2026.08.08</dt>
+        <dd class="info-text">GALLERYを公開しました。</dd>
+      </dl>
+      <dl class="info-item">
         <dt class="info-date">2026.08.08</dt>
         <dd class="info-text">プロフィール画像を更新しました。</dd>
       </dl>
@@ -1015,6 +1067,40 @@ function toggleInfo() {
     moreContent.style.display = 'none';
     btn.textContent = 'もっと見る ＋';
   }
+}
+function toggleAudio(audioId, containerElement) {
+  const audio = document.getElementById(audioId);
+  const playIcon = containerElement.querySelector('.play-icon');
+
+  document.querySelectorAll('audio').forEach(item => {
+    if (item.id !== audioId) {
+      item.pause();
+      item.currentTime = 0;
+    }
+  });
+  document.querySelectorAll('.jacket-player-container').forEach(item => {
+    if (item !== containerElement) {
+      item.classList.remove('playing');
+      const icon = item.querySelector('.play-icon');
+      if (icon) icon.textContent = '▶';
+    }
+  });
+
+  if (audio.paused) {
+    audio.play().then(() => {
+      containerElement.classList.add('playing');
+      playIcon.textContent = '❚❚';
+    }).catch(e => console.log(e));
+  } else {
+    audio.pause();
+    containerElement.classList.remove('playing');
+    playIcon.textContent = '▶';
+  }
+
+  audio.onended = () => {
+    containerElement.classList.remove('playing');
+    playIcon.textContent = '▶';
+  };
 }
 </script>
   
@@ -1132,29 +1218,89 @@ function toggleInfo() {
 
   <div class="disco-grid fade-up">
     <div class="disco-item">
-      <div class="disco-jacket"><img src="cd01_kirinooto.gif" alt="霧の音 ジャケット"></div>
-      <div class="disco-label"><p class="disco-no">1st Single</p><p class="disco-title">霧の音</p></div>
+  <div class="disco-jacket jacket-player-container" onclick="toggleAudio('audio-kirinooto', this)">
+    <img src="cd01_kirinooto.gif" alt="霧の音 ジャケット">
+    <div class="play-overlay">
+      <span class="play-icon">▶</span>
     </div>
+    <audio id="audio-kirinooto" src="霧の音(short ver).m4a" preload="none"></audio>
+  </div>
+  <div class="disco-label">
+    <p class="disco-no">1st Single</p>
+    <p class="disco-title">霧の音</p>
+    <span style="font-size:0.7rem; color:var(--ink-dim); margin-top:4px; display:block;">（ジャケットをタップして試聴）</span>
+  </div>
+</div>
     <div class="disco-item">
-      <div class="disco-jacket"><img src="cd02_raiun.gif" alt="雷雲 ジャケット"></div>
-      <div class="disco-label"><p class="disco-no">2nd Single</p><p class="disco-title">雷雲</p></div>
+  <div class="disco-jacket jacket-player-container" onclick="toggleAudio('audio-raiu', this)">
+    <img src="cd02_raiu.gif" alt="雷雲 ジャケット">
+    <div class="play-overlay">
+      <span class="play-icon">▶</span>
     </div>
+    <audio id="audio-raiu" src="雷雲(short ver).m4a" preload="none"></audio>
+  </div>
+  <div class="disco-label">
+    <p class="disco-no">2nd Single</p>
+    <p class="disco-title">雷雲</p>
+    <span style="font-size:0.7rem; color:var(--ink-dim); margin-top:4px; display:block;">（ジャケットをタップして試聴）</span>
+  </div>
+</div>
     <div class="disco-item">
-      <div class="disco-jacket"><img src="cd05_melos.jpeg" alt="メロス ジャケット"></div>
-      <div class="disco-label"><p class="disco-no">3rd Single</p><p class="disco-title">メロス</p></div>
+  <div class="disco-jacket jacket-player-container" onclick="toggleAudio('audio-meros', this)">
+    <img src="cd04_meros.gif" alt="メロス ジャケット">
+    <div class="play-overlay">
+      <span class="play-icon">▶</span>
     </div>
+    <audio id="audio-meros" src="メロス(short ver).m4a" preload="none"></audio>
+  </div>
+  <div class="disco-label">
+    <p class="disco-no">3rd Single</p>
+    <p class="disco-title">メロス</p>
+    <span style="font-size:0.7rem; color:var(--ink-dim); margin-top:4px; display:block;">（ジャケットをタップして試聴）</span>
+  </div>
+</div>
     <div class="disco-item">
-      <div class="disco-jacket"><img src="cd06_buzzerbeater.jpeg" alt="BUZZER BEATER ジャケット"></div>
-      <div class="disco-label"><p class="disco-no">4th Single</p><p class="disco-title">BUZZER BEATER</p></div>
+  <div class="disco-jacket jacket-player-container" onclick="toggleAudio('audio-buzzerbeat', this)">
+    <img src="cd06_buzzerbeat.gif" alt="ブザービート ジャケット">
+    <div class="play-overlay">
+      <span class="play-icon">▶</span>
     </div>
+    <audio id="audio-buzzerbeat" src="buzzer(short ver).m4a" preload="none"></audio>
+  </div>
+  <div class="disco-label">
+    <p class="disco-no">5th Single</p>
+    <p class="disco-title">ブザービート</p>
+    <span style="font-size:0.7rem; color:var(--ink-dim); margin-top:4px; display:block;">（ジャケットをタップして試聴）</span>
+  </div>
+</div>
+<div class="disco-item">
+  <div class="disco-jacket jacket-player-container" onclick="toggleAudio('audio-keshiki', this)">
+    <img src="cd03_tochunokeshiki.gif" alt="途中の景色 ジャケット">
+    <div class="play-overlay">
+      <span class="play-icon">▶</span>
+    </div>
+    <audio id="audio-keshiki" src="真夜中の白昼夢(short ver).m4a" preload="none"></audio>
+  </div>
+  <div class="disco-label">
+    <p class="disco-no">1st Mini Album</p>
+    <p class="disco-title">途中の景色</p>
+    <span style="font-size:0.7rem; color:var(--ink-dim); margin-top:4px; display:block;">（ジャケットをタップして試聴）</span>
+  </div>
+</div>
+
     <div class="disco-item">
-      <div class="disco-jacket"><img src="cd03_tochunokeshiki.gif" alt="途中の景色 ジャケット"></div>
-      <div class="disco-label"><p class="disco-no">1st Mini Album</p><p class="disco-title">途中の景色</p></div>
+  <div class="disco-jacket jacket-player-container" onclick="toggleAudio('audio-tegami', this)">
+    <img src="cd05_tegami.gif" alt="手紙 ジャケット">
+    <div class="play-overlay">
+      <span class="play-icon">▶</span>
     </div>
-    <div class="disco-item">
-      <div class="disco-jacket"><img src="cd04_tegami.gif" alt="手紙 ジャケット"></div>
-      <div class="disco-label"><p class="disco-no">1st Album</p><p class="disco-title">手紙</p></div>
-    </div>
+    <audio id="audio-tegami" src="手紙(short ver).m4a" preload="none"></audio>
+  </div>
+  <div class="disco-label">
+    <p class="disco-no">4th Single</p>
+    <p class="disco-title">手紙</p>
+    <span style="font-size:0.7rem; color:var(--ink-dim); margin-top:4px; display:block;">（ジャケットをタップして試聴）</span>
+  </div>
   </div>
 </section>
 
