@@ -752,7 +752,24 @@
     border: 1px solid var(--gold);
     box-shadow: 0 0 35px rgba(124, 32, 32, 0.4);
   }
-
+/* ================= INSTAGRAM FEED ================= */
+.insta-feed-wrapper{
+  max-width:800px;
+  margin:0 auto;
+  border:1px solid var(--line);
+  background:var(--bg-panel);
+  padding:4px;
+}
+.insta-note{
+  margin-top:16px;
+  font-size:0.8rem;
+  color:var(--ink-dim);
+  text-align:center;
+}
+.insta-note a{
+  color:var(--gold-bright);
+  border-bottom:1px solid var(--line);
+}
   /* ================= FOOTER / SNS ================= */
   footer{
     padding:clamp(56px, 10vw, 100px) 24px 48px;
@@ -1015,6 +1032,7 @@
     <li><a href="#members">MEMBERS</a></li>
     <li><a href="#discography">DISCOGRAPHY</a></li>
     <li><a href="#movie">MOVIE</a></li>
+<li><a href="#instagram">INSTAGRAM</a></li>
     <li><a href="#gallery">GALLERY</a></li>
     <li><a href="#follow">FOLLOW</a></li>
   </ul>
@@ -1035,7 +1053,9 @@
   <a href="#members" onclick="toggleNav()">MEMBERS</a>
   <a href="#discography" onclick="toggleNav()">DISCOGRAPHY</a>
   <a href="#movie" onclick="toggleNav()">MOVIE</a>
-  <a href="#gallery" onclick="toggleNav()">GALLERY</a>
+<a href="#instagram" onclick="toggleNav()">INSTAGRAM</a>
+  <a href="#gallery" 
+onclick="toggleNav()">GALLERY</a>
   <a href="#follow" onclick="toggleNav()">FOLLOW</a>
 </nav>
 
@@ -1122,20 +1142,24 @@
   <div class="info-list fade-up">
     <!-- 【常に表示する最新の3件】 -->
     <dl class="info-item">
+      <dt class="info-date">2026.08.30</dt>
+      <dd class="info-text">Instagram機能を追加しました。</dd>
+    </dl>
+    <dl class="info-item">
       <dt class="info-date">2026.08.17</dt>
-      <dd class="info-text">Movie機能を実装しました。</dd>
+      <dd class="info-text">Movie機能を追加しました。</dd>
     </dl>
     <dl class="info-item">
       <dt class="info-date">2026.08.10</dt>
       <dd class="info-text">DISCOGRAPHYにて楽曲視聴機能を追加しました。</dd>
     </dl>
-    <dl class="info-item">
-      <dt class="info-date">2026.08.10</dt>
-      <dd class="info-text">サイトマップ機能を追加しました。</dd>
-    </dl>
 
     <!-- 【「もっと見る」で展開される過去のお知らせ】 -->
     <div id="more-info" style="display: none;">
+    <dl class="info-item">
+    <dt class="info-date">2026.08.10</dt>
+      <dd class="info-text">サイトマップ機能を追加しました。</dd>
+    </dl>
       <dl class="info-item">
         <dt class="info-date">2026.08.09</dt>
         <dd class="info-text">informationを公開しました。</dd>
@@ -1451,6 +1475,22 @@ function toggleAudio(audioId, containerElement) {
 
 
   </div>
+</section>
+
+<div class="crack-divider" aria-hidden="true">
+  <svg viewBox="0 0 1080 60" preserveAspectRatio="none">
+    <path class="crack-path" d="M0,30 L120,28 L150,10 L180,42 L230,32 L260,55 L310,25 L360,30 L420,15 L460,38 L520,30 L580,20 L640,40 L700,28 L760,32 L820,12 L870,38 L930,30 L1000,26 L1080,30" />
+  </svg>
+</div>
+<!-- ========== INSTAGRAM ========== -->
+<section id="instagram">
+  <p class="eyebrow fade-up">Instagram</p>
+  <div class="insta-feed-wrapper fade-up">
+    <!-- Elfsight Instagram Feed | 影音雷時@Instagram -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+    <div class="elfsight-app-81f57730-830e-431e-bd3d-e91021579c3d" data-elfsight-app-lazy></div>
+  </div>
+  <p class="insta-note fade-up">最新の投稿は<a href="https://www.instagram.com/kageonraizi" target="_blank" rel="noopener">Instagram</a>でもチェックできます</p>
 </section>
 
 <div class="crack-divider" aria-hidden="true">
